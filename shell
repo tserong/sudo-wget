@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cat<<END
+
+Congratulations!  Assuming you followed the instructions
+correctly you just told your system to download arbitrary
+code via a non-authenticated, unencrypted connection and
+execute it locally as root.
+
+All your base are belong to us.  Have a nice day!
+
+END
+
