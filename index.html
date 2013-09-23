@@ -29,21 +29,60 @@
 <pre><code>$ wget -q -O - http://tserong.github.io/sudo-wget/install | sudo bash
 </code></pre>
 
+        <h3>Why This is a Bad Idea</h3>
+
+        <p>Let's look at that command in detail.  It's downloading something via
+        HTTP (which is unencrypted and provides no guarantee of authenticity)
+        and then executes whatever was downloaded in a root shell.  Here's
+        a non-exhaustive list of potential problems:</p>
+
+        <ul>
+          <li>A transparent proxy or other bit of trickery on the network
+          between you and the server could be tampering with or replacing what
+          you're downloading.</li>
+          <li>DNS cache poisoning could have directed your request to some
+          other site, again delivering potentially malicious code.</li>
+          <li>Someone (not the author of the install script) could have
+          compromised the server and replaced said script with something nasty.</li>
+          <li>That potentially nasty, unverified piece of code that you haven't
+          reviewed yourself is being executed immediately with room permissions.</li>
+        </ul>
+
+        <h3>How Can This Be Fixed</h3>
+
+        <p>If you presently recomment any variant of the above command for
+        installation or bootstrapping your software, stop doing that immediately.
+        Instead, try one of these alternatives:</p>
+
+        <ul>
+          <li>If your install script is sufficiently short, just publish the
+          commands to run in your installation documentation.</li>
+          <li>If your script is long and complicated, offer it for download
+          along with MD5 and SHA1 signatures of the file, then encourage your
+          users to check both before running the script.  Better yet, PGP sign
+          it and encourage your users to verify the signature.</li>
+          <li>If it's Linux software, see if you can dispense with standalone
+          install scripts entirely and instead build proper signed packages
+          (the <a href="http://openbuildservice.org/">Open Build Service</a> can
+          build packages for various Linux distros which will be signed by the
+          build system's PGP key).</li>
+        </ul>
+
+        <p>If you are a user of some software which recommends any variant of
+        the above command, please point the author of said software to this
+        page.</p>
+
         <h3>Author</h3>
 
-        <p>Tim Serong (<a href="https://github.com/tserong" class="user-mention">@tserong</a>)
+        <p>Tim Serong (<a href="https://twitter.com/tserong" class="user-mention">@tserong</a>)
         is responsible for this public service announcement.</p>
 
         <h3>Disclaimer</h3>
 
-        <p>Tim is <em>not</em> responsible for the effects of evil transparent proxies, DNS
-        cache poisioning, or any other form of malicious attack on any of your systems.  You
-        certainly should <em>not</em> have run the command above without thinking very, very
-        carefully about what you were doing.</p>
-
-        <p>If you recommend any variant on the above command for the
-        installation or bootstrapping of your software, please stop
-        doing so <em>right now</em>.</p>
+        <p>No responsibility is accepted for the effects of evil transparent
+        proxies, DNS cache poisioning, or any other form of malicious attack on
+        any of your systems that may result from running the command listed
+        under "Installation Instructions".</p>
       </section>
     </div>
 
